@@ -4,12 +4,12 @@ echo "${item[@]}"
 
 
 
-read -p "Please enter position: " pos
-echo "Item at $pos is: ${item[$pos]}"
+read -p "Please enter position: " position
+echo "Item at $position is: ${item[$position]}"
 
 
 
-read -p "Please choose a word to add to the list: " word
- item+=("$word")
+read -p "Please choose a word to add to the list: " UserWord
+ item+=("$UserWord")
 echo "${item[@]}"
-echo "Item '$word' added to list"
+echo "Item '$UserWord' added to list"
