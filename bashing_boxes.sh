@@ -23,3 +23,12 @@ else  unset 'random_array_of_items[-1]'
 	echo "final item removed"
 fi
 echo "${random_array_of_items[@]}"
+
+
+read -p "choose The position of the word you want to delete: " user_word_delete
+
+unset "random_array_of_items[$user_word_delete]"
+echo "${random_array_of_items[@]}"
+
+
+read -p "Would you like to exit the script y/n : " Exit_Y_N
