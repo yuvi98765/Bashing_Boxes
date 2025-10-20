@@ -1,4 +1,6 @@
 #!/bin/bash
+
+while true; do
 random_array_of_items=("Peanut butter" "Shawl" "Cargo ship" "Wallet" "Xylophone" "Medicine cabinet" "Apron" "Washing machine" "Tree stump" "Milkshake")
 echo "${random_array_of_items[@]}"
 
@@ -18,6 +20,7 @@ read -p "you wanna delete the last word in the list  y/n: " function_four_yes_no
 if [[ $function_four_yes_no = n ]]; then
 	
 echo "Okay bye"
+exit 0
 
 else  unset 'random_array_of_items[-1]'
 	echo "final item removed"
@@ -31,4 +34,9 @@ unset "random_array_of_items[$user_word_delete]"
 echo "${random_array_of_items[@]}"
 
 
-read -p "Would you like to exit the script y/n : " Exit_Y_N
+read -p "Would you like to exit the script y/n : " exit_y_n
+if [[ $exit_y_n = y ]]; then
+	exit 0
+fi
+done
+
