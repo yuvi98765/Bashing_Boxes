@@ -2,8 +2,15 @@
 # 1) delaire all needed variables
 # 2) define all functions
 # 3) start main logic
-
+data_directory="./data"
 random_array_of_items=("Peanut butter" "Shawl" "Cargo ship" "Wallet" "Xylophone" "Medicine cabinet" "Apron" "Washing machine" "Tree stump" "Milkshake")
+
+check_for_directory(){
+if [ ! -d "$data_directory" ]; then
+	mkdir "$data_directory"
+fi
+}
+
    
 display_menu_options(){
 	echo " 
@@ -12,14 +19,23 @@ display_menu_options(){
 	3. Add a new word
 	4. Delete the last word
 	5. Delete a word by position
-	6. Exit"
-    read -p "Choose an option (1-6): " function_choice
-    check_user_iput
+	6. Delete a saved box 
+	7. Save current box
+	8. Load a saved box
+	9. List saved boxes
+	10. Exit
+	"
+	
+
+    read -p "Choose an option (1-8): " function_choice
+    check_user_input
 }
 
 
 
-check_user_iput(){
+
+
+check_user_input(){
 	case  $function_choice in
 		1|one)	
 			print_all_items
@@ -39,12 +55,15 @@ check_user_iput(){
 		6|exit)
 			exit_script
 			;;
+		7)
+			save_box
+			;;
 		*)
 			display_menu_options
 			;;
 	esac
 }
-#done
+
 print_all_items(){
 			echo "${random_array_of_items[@]}"
 			display_menu_options
@@ -73,7 +92,17 @@ delete_word_by_position(){
 			echo "${random_array_of_items[@]}"
 			display_menu_options
 }
+save_box(){
+	read -p " What would you like to name this save file?: " user_save_file_name
+	filepath="$data_directory/$user_save_file_name.box"
+{
+echo "saved_items=(${random_array_of_items[@]@Q})"
+} > "$filepath"
+echo "Box saved to $filepath"
+}
+
 exit_script(){
 			exit 0
 }
+check_for_directory
 display_menu_options
