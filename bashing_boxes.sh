@@ -58,6 +58,12 @@ check_user_input(){
 		7)
 			save_box
 			;;
+		8)
+			load_box
+			;;
+		9)
+			list_boxes
+			;;
 		*)
 			display_menu_options
 			;;
@@ -100,7 +106,28 @@ echo "saved_items=(${random_array_of_items[@]@Q})"
 } > "$filepath"
 echo "Box saved to $filepath"
 }
-
+load_box(){
+	read -p "please write the name of the box you would load: " user_load_box
+	filepath="$data_directory/$user_load_box.box"
+	if [ -f "$filepath" ]; then
+		source "$filepath"
+		random_array_of_items=("${saved_items[@]}")
+		echo " ' $user_load_box ' loaded "
+		echo "current items: ${random_array_of_items[@]}"
+	else
+		echo "Invalid filename"
+	fi
+	display_menu_options
+}
+list_boxes() {
+	echo "saved boxes:"
+	for file in "$data_directory"/*.box; do
+		if [ -f "$file" ]; then
+			echo "$file"
+		fi
+	done
+	display_menu_options
+}
 exit_script(){
 			exit 0
 }
