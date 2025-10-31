@@ -19,11 +19,10 @@ display_menu_options(){
 	3. Add a new word
 	4. Delete the last word
 	5. Delete a word by position
-	6. Delete a saved box 
-	7. Save current box
-	8. Load a saved box
-	9. List saved boxes
-	10. Exit
+	6. Save curerent Box
+	7. Load a saved box
+	8. List saved boxes
+	9. Exit
 	"
 	
 
@@ -52,17 +51,18 @@ check_user_input(){
 		5)
 			delete_word_by_position
 			;;
-		6|exit)
-			exit_script
-			;;
-		7)
+		
+		6)
 			save_box
 			;;
-		8)
+		7)
 			load_box
 			;;
-		9)
+		8)
 			list_boxes
+			;;
+		9|exit)
+			exit_script
 			;;
 		*)
 			display_menu_options
@@ -129,7 +129,20 @@ list_boxes() {
 	display_menu_options
 }
 exit_script(){
-			exit 0
-}
+	read -p " would you like to save before you exit? y/n : " would_user_like_to_exit
+case $would_user_like_to_exit in
+	y|yes)
+		save_box
+		;;
+	n|no) 
+		exit 0
+		;;
+	*)
+		exit_script
+		;;
+esac
+	}
+
+
 check_for_directory
 display_menu_options
